@@ -2,10 +2,10 @@
 >基于SpringCloud和quartz的一个统一调度服务，利用客户端负载均衡进行服务调用。
 
 # 技术选型
-1、核心框架：`SpringBoot 2.0.3.RELEASE`、`Springcloud Finchley.SR1`
-2、任务调度：`Quartz`
-3、持久层框架：`MyBatis` + `MyBatis-Plus`
-4、数据库：`mysql`
+1. 核心框架：`SpringBoot 2.0.3.RELEASE`、`Springcloud Finchley.SR1` 
+2. 任务调度：`Quartz` 
+3. 持久层框架：`MyBatis` + `MyBatis-Plus` 
+4. 数据库：`mysql`
 
 # 数据库脚本
 ```sql
@@ -25,6 +25,6 @@ CREATE TABLE `sched_config` (
 )
 ```
 # 待办
-1、加入日志记录功能
-2、支持dubbo服务调用
-3、失败重试
+1. 加入日志记录功能
+2. 支持dubbo服务调用
+3. 失败重试
