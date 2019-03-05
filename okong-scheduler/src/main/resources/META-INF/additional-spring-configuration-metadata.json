@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "swagger.enabled",
+  "type": "java.lang.String",
+  "description": "是否启用swagger"
+}]}
