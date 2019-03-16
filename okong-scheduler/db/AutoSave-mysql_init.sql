@@ -1,24 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : localhost
-Source Server Version : 50724
-Source Host           : 127.0.0.1:3306
-Source Database       : java-project
-
-Target Server Type    : MYSQL
-Target Server Version : 50724
-File Encoding         : 65001
-
-Date: 2019-03-05 23:15:33
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for `sched_config`
--- ----------------------------
-DROP TABLE IF EXISTS `sched_config`;
 CREATE TABLE `sched_config` (
   `id` bigint(20) NOT NULL,
   `code` varchar(50) DEFAULT NULL COMMENT '任务编码',
@@ -34,9 +13,3 @@ CREATE TABLE `sched_config` (
   `gmt_modified` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of sched_config
--- ----------------------------
-INSERT INTO `sched_config` VALUES ('1', '测试task-01', '01', 'http://shedlock-demo/api/task', '*/15 * * * * ?', '1', null, null, null, '2019-03-05 21:00:42', '2019-03-05 21:00:45');
-INSERT INTO `sched_config` VALUES ('2', '测试task-02', '02', 'http://127.0.0.1:8001/api/task', '*/15 * * * * ?', '1', null, null, null, null, null);

@@ -1,11 +1,8 @@
 package cn.lqdev.java.scheduler.job;
 
-import org.quartz.DisallowConcurrentExecution;
-import org.quartz.JobDataMap;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import cn.lqdev.java.scheduler.biz.entity.SchedConfig;
@@ -14,32 +11,27 @@ import reactor.core.publisher.Mono;
 
 /** 
 *
-* @ClassName   类名：TaskJob 
+* @ClassName   类名：JobService 
 * @Description 功能说明：
 * <p>
 * TODO
 *</p>
 ************************************************************************
-* @date        创建日期：2019年3月4日
+* @date        创建日期：2019年3月16日
 * @author      创建人：oKong
 * @version     版本号：V1.0
 *<p>
 ***************************修订记录*************************************
 * 
-*   2019年3月4日   oKong   创建该类功能。
+*   2019年3月16日   oKong   创建该类功能。
 *
 ***********************************************************************
 *</p>
 */
-//@DisallowConcurrentExecution 说明在一个任务执行时，另一个定时点来临时不会执行任务，比如一个定时是间隔3分钟一次，但任务执行了5分钟，此时会等上个任务完成后再执行下一次定时任务
-@DisallowConcurrentExecution
+@Component
 @Slf4j
-public class TaskJob implements org.quartz.Job{
-	
-	/**
-	 * spring5中 异步restTemplate已被标记位作废了
-	 * 这里尝试使用webClient
-	 */ 
+public class JobService {
+
 	@Autowired
 	@Qualifier("balanceWebClient")
 	private WebClient.Builder balanceWebClientBuilder;
@@ -48,13 +40,7 @@ public class TaskJob implements org.quartz.Job{
 	@Qualifier("webClient")
 	private WebClient.Builder webClientBuilder;
 	
-	
-	@Override
-	public void execute(JobExecutionContext context) throws JobExecutionException {
-		//执行方法
-		//获取任务实体对象
-		JobDataMap jobDataMap = context.getJobDetail().getJobDataMap();
-		SchedConfig schedConfig = (SchedConfig) jobDataMap.get("config");
+	public String execJob(SchedConfig schedConfig){
 		log.info("执行定时任务：{}", schedConfig);
 		//根据不同类型进行不同的处理逻辑
 		Mono<String> monoRst = null;
@@ -78,6 +64,7 @@ public class TaskJob implements org.quartz.Job{
 		if(monoRst != null) {
 		  log.info("调用服务结果为：{}", monoRst.block());
 		}
+		
+		return monoRst != null ? monoRst.block() : "无返回值";
 	}
-
 }

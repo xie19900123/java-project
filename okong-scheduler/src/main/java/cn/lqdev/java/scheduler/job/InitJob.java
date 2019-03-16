@@ -32,12 +32,12 @@ import static org.quartz.TriggerBuilder.newTrigger;
 *</p>
 ************************************************************************
 * @date        创建日期：2019年3月4日
-* @author      创建人：xds
+* @author      创建人：oKong
 * @version     版本号：V1.0
 *<p>
 ***************************修订记录*************************************
 * 
-*   2019年3月4日   xds   创建该类功能。
+*   2019年3月4日   oKong   创建该类功能。
 *
 ***********************************************************************
 *</p>
@@ -75,22 +75,22 @@ public class InitJob {
 			return;
 		}
 		for(SchedConfig config : schedConfigList) {
-			String name = config.getName();//任务名称
-			JobDetail jobDetail = newJob(TaskJob.class).withIdentity(name, "okongJobGroup").build();
+			String code = config.getCode();//任务编码
+			JobDetail jobDetail = newJob(TaskJob.class).withIdentity(code, "okongJobGroup").build();
 			//设置运行时参数
 			JobDataMap jobDataMap = jobDetail.getJobDataMap();
 			jobDataMap.put("config", config);
 			//创建trigger触发器
 			Trigger trigger = newTrigger()
-					.withIdentity(name, "okongTriggerGroup")
+					.withIdentity(code, "okongTriggerGroup")
 					.withSchedule(cronSchedule(config.getCronConfig())).build();
 			
 			//启动定时器
 			try {
 				scheduler.scheduleJob(jobDetail, trigger);
-				log.info("任务[{}]启动成功", name);
+				log.info("任务[{}]启动成功", code);
 			} catch (SchedulerException e) {
-				log.error("任务[{}]启动失败,{}", name,e.getMessage());
+				log.error("任务[{}]启动失败,{}", code, e.getMessage());
 			}
 		}
 		log.info("初始化任务结束......");

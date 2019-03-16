@@ -5,7 +5,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.0.3.RELEASE</version>
-		<relativePath />
+		<relativePath/>
 		<!-- lookup parent from repository -->
 	</parent>  
   <groupId>cn.lqdev.java</groupId>
@@ -24,6 +24,7 @@
 	</properties>  
   <modules>
     <module>okong-scheduler</module>
+    <module>okong-scheduler-api</module>
   </modules>
 <!-- 统一模块的依赖版本 -->
 	<dependencyManagement>

@@ -4,6 +4,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.activerecord.Model;
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.Version;
 
 import lombok.Data;
@@ -24,7 +25,13 @@ public class SchedConfig extends Model<SchedConfig> {
 
     private static final long serialVersionUID = 1L;
 
+    @TableId
     private Long id;
+    
+	/**
+	 * 任务编码，区分任务是否一直
+	 */
+	private String code;    
     /**
      * 任务名称
      */
@@ -44,7 +51,7 @@ public class SchedConfig extends Model<SchedConfig> {
     /**
      * 状态：1启用 0 停用
      */
-    private String status;
+    private Integer status;
     /**
      * 备注说明
      */
@@ -68,6 +75,8 @@ public class SchedConfig extends Model<SchedConfig> {
 
 
     public static final String ID = "id";
+    
+    public static final String CODE = "code";
 
     public static final String NAME = "name";
 

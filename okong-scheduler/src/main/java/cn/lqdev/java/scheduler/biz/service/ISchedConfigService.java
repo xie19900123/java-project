@@ -12,5 +12,9 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2019-03-04
  */
 public interface ISchedConfigService extends IService<SchedConfig> {
+	
+	public SchedConfig queryByCode(String code);
+	
+	public boolean delByCode(String code);
 
 }
